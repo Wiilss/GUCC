@@ -1,0 +1,250 @@
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <ostream>
+#include <algorithm>
+#include <vector> 
+#include <stdio.h>
+#include <fstream>
+#include <array>
+#include <thread>
+#include <math.h>
+#include <cmath>
+#include <list>
+
+#define prints _SAL2_Source_(_Printf_format_string_, (), _Printf_format_string_impl_)
+
+using namespace std;
+
+vector<string> psplit(string str, char delimiter) {
+	vector<string> internal;
+	stringstream ss(str);
+	string tok;
+	int rep = 0;
+
+	while (getline(ss, tok, delimiter)) 
+	{
+		internal.push_back(tok);
+		rep++;
+		
+	}
+
+	return internal;
+}
+
+
+
+bool Validate(size_t pos, string line)
+{
+	if (pos > 0 && pos < line.length())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+vector<int> c(string s, int i, string word, bool isc)
+{
+	int start = 0;
+	int end = i;
+
+	int inc = 0;
+
+	int posend;
+	int posstart;
+
+	vector<int> e;
+
+	while (start < s.length())
+	{
+		string h = s.substr(start);
+		string w = h.substr(0, end);
+
+		//cout << w << ", " << start << ", " << end << endl;
+		if (w == word)
+		{
+			//cout << "sus" << endl;
+			posend = start + end;
+			posstart = start;
+			inc++;
+
+			if (!isc)
+			{
+				e.push_back(posstart);
+				e.push_back(posend);
+			}
+
+		}
+		start++;
+		//end++;
+		//w = s.substr(start, end);
+	}
+
+	if (isc)
+	{
+		e.push_back(inc);
+	}
+
+	return e;
+}
+
+string sremove(string d, int s, int e)
+{
+	string f;
+
+	string hold0 = d.substr(0, s);
+	string hold1 = d.substr(e);
+	//printf("<%s>::<%s>", hold0, hold1);
+
+	f += hold0 + hold1;
+	return f;
+}
+
+string subs(string s, int i, int l)
+{
+	string re;
+
+	for (int c = 0; c < s.length(); c++)
+	{
+		if (c >= i && c <= l)
+		{
+			re += s.at(c);
+		}
+	}
+
+	return re;
+}
+
+int len(string s)
+{
+	int i = 0;
+	for (int c = 0; c < s.length(); c++)
+	{
+		i++;
+	}
+
+	return i;
+}
+
+void rems(string& s, string d)
+{
+	vector<int> am = c(s, d.length(), d, true);
+	for (int i = 0; i < am[0]; i++)
+	{
+		vector<int> g = c(s, d.length(), d, false);
+		s = sremove(s, g[0], g[1]);
+	}
+}
+
+string remc(string s, char c)
+{
+	string ret;
+
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (s.at(i) == c)
+		{
+		}
+		else
+		{
+			ret += s.at(i);
+		}
+	}
+
+	return ret;
+}
+
+void removefb(string& s)
+{
+	while (s.front() != ' ' && s.back() != ' ')
+	{
+		if (s.front() == ' ')
+		{
+			s = s.substr(1);
+		}
+		if (s.back() == ' ')
+		{
+			s = s.substr(0, s.length() - 1);
+		}
+	}
+}
+
+bool checkb(string s)
+{
+	bool b = true;
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (s.at(i) != ' ')
+		{
+			b = false;
+		}
+	}
+	return b;
+}
+
+string appspace(string s)
+{
+	string f;
+	vector<string> a = psplit(s, ' ');
+
+	for (int i = 0; i < a.size(); i++)
+	{
+		if (!checkb(a[i]))
+		{
+			f += remc(a[i], ' ') + " ";
+		}
+	}
+	return f;
+}
+
+vector<string> clearsplit(string s, char delim)
+{
+	string f = appspace(s);
+	return psplit(f, delim);
+}
+
+void reps(string& s, string wtr, string wtrw)
+{
+	string same;
+	vector<int> am = c(s, wtr.length(), wtr, true);
+	vector<int> g = c(s, wtr.length(), wtr, false);
+	s = sremove(s, g[0], g[1]);
+	string f = s.substr(0, g[0]);
+	int df = g[1] + 1;
+	string fs = s.substr(g[0], df);
+	same = f + wtrw + fs;
+	for (int i = 0; i < am[0]; i++)
+	{
+
+	}
+
+	s = same;
+}
+
+void repsm(string& s, string wtr, string wtrw)
+{
+	vector<int> am = c(s, wtr.length(), wtr, true);
+	for (int i = 0; i < am[0]; i++)
+	{
+		reps(s, wtr, wtrw);
+	}
+}
+
+void printv(vector<string> s, bool b = true)
+{
+  for (int i =0; i < s.size(); i++)
+  {
+    if (b)
+    {
+      cout << s[i] << endl;
+    }
+    else
+    {
+      cout << s[i];
+    }
+  }
+}
