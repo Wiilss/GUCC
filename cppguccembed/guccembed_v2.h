@@ -77,7 +77,7 @@ namespace guccstd
 			return "nullptr";
 
 		}	
-
+		/*
 		Auto autoGetGuccValue(std::string varname)
 		{
 			Auto ret = new std::string("nullptr");
@@ -90,7 +90,7 @@ namespace guccstd
 			return ret;
 
 		}	
-
+		*/
 		void CallGuccFunction(std::string s, std::vector<std::string> arguments = {})
 		{
 			for (int i = 0; i < functions.size(); i++) {
