@@ -1,3 +1,14 @@
+
+#include <cmath>
+#include <cstdint>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <string>
+#include <vector>
+
 #include "gucc/guccmain.h"
 #include "gucc/pl.h"
 
